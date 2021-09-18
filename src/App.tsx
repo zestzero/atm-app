@@ -1,10 +1,22 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { AuthenticationService } from './services/AuthenticationService';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const authService = new AuthenticationService();
+const pin = process.env.REACT_APP_TEMP_PIN; // for testing
 
 const App: FunctionComponent = () => {
+    const [currentBalance, setCurrentBalance] = useState<number>(0);
+    const auth = async () => {
+        const response = await authService.request({ pin: pin as string });
+        setCurrentBalance(response.currentBalance);
+    };
+
+    useEffect(() => {
+        auth();
+    }, []);
+
     return (
         <div className="App">
             <header className="App-header">
@@ -15,7 +27,7 @@ const App: FunctionComponent = () => {
                 <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
                     Learn React
                 </a>
-                <p>URL: {API_URL}</p>
+                <p>Your balance {currentBalance}</p>
             </header>
         </div>
     );
