@@ -1,4 +1,4 @@
-import { AuthenticationRequest, AuthenticationResponse } from '../models/authentication';
+import { AuthenticationRequest, AuthenticationResponse } from '../types/authentication';
 import { BaseApiService } from './BaseApiService';
 
 export class AuthenticationService extends BaseApiService {
