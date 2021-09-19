@@ -14,6 +14,11 @@ const NumPad: FunctionComponent<Props> = (props) => {
             setPin(pin.concat(value || ''));
         }
     };
+    const onBackspaceClicked = () => {
+        const result = pin.substr(0, pin.length - 1);
+        setPin(result);
+    };
+
     const onEnterClicked = () => props.onAuthClick(pin);
     return (
         <div>
@@ -34,7 +39,7 @@ const NumPad: FunctionComponent<Props> = (props) => {
                 <NumButton number="9" onClick={onPinClicked} />
             </div>
             <div>
-                <NumButton number="<" onClick={onPinClicked} />
+                <NumButton number="<" onClick={onBackspaceClicked} />
                 <NumButton number="0" onClick={onPinClicked} />
                 <NumButton number="⏎" onClick={onPinClicked} />
             </div>

@@ -1,9 +1,9 @@
 import { FunctionComponent, useState } from 'react';
 import { AuthenticationService } from './services/AuthenticationService';
-import './App.scss';
 import { useAppSelector } from './app/hook';
 import { NumPad } from './components/NumPad/NumPad';
 import { Page } from './features/pageConfig/types';
+import './App.scss';
 
 const authService = new AuthenticationService();
 
