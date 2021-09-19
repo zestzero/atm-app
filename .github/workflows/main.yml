@@ -10,33 +10,24 @@ on:
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: Install Dependencies
+      uses: actions/setup-node@v2
       with:
         node-version: '14.17.6'
-    # Install dependencies
-    - name: Install Dependencies
-      uses: CultureHQ/actions-yarn@v1.0.1
-      with:
-        args: install
+      run: yarn install
     
     # Run lint
     - name: Run tslint formatting
-      run: npm run lint
+      run: yarn lint
       
     # Run unit test
     - name: Run jest unit tests
-      run: npm run test
+      run: yarn test
 
     - name: Build package
-      run: npm run build
+      run: yarn build
