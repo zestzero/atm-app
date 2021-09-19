@@ -1,29 +1,25 @@
-import { FunctionComponent, useState } from 'react';
-import { AuthenticationService } from './services/AuthenticationService';
-import { useAppSelector } from './app/hook';
+import { FunctionComponent } from 'react';
+import { useAppDispatch, useAppSelector } from './app/hook';
 import { NumPad } from './components/NumPad/NumPad';
 import { Page } from './features/pageConfig/types';
 import './App.scss';
-
-const authService = new AuthenticationService();
+import { authPin } from './features/authentication/authenticationSlice';
 
 const App: FunctionComponent = () => {
+    const dispatch = useAppDispatch();
     const currentPage = useAppSelector((state) => state.pageConfig.currentPage);
-    const [currentBalance, setCurrentBalance] = useState<number>(0);
+    const currentBalance = useAppSelector((state) => state.auth.currentBalance);
 
     const onAuthClick = async (pin?: string) => {
-        const response = await authService.request({ pin: pin as string });
-        if (response.isSuccess) {
-            setCurrentBalance(response.data.currentBalance);
-        } else {
-            console.log('Auth error');
-        }
+        dispatch(authPin({ pin: pin || '' }));
     };
 
     return (
         <div className="App">
             <p>{currentBalance}</p>
-            <header className="App-header">{currentPage === Page.LOGIN && <NumPad onAuthClick={onAuthClick} />}</header>
+            <header className="App-header">
+                {currentPage === Page.LOGIN && <NumPad pinLength={4} onAuthClick={onAuthClick} />}
+            </header>
         </div>
     );
 };

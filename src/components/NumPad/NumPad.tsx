@@ -4,13 +4,14 @@ import Button from '../Button/Button';
 import NumButton from '../NumButton/NumButton';
 
 interface Props {
+    pinLength: number;
     onAuthClick: (pin?: string) => void;
 }
 
 const NumPad: FunctionComponent<Props> = (props) => {
     const [pin, setPin] = useState<string>('');
     const onPinClicked = (value?: string) => {
-        if (pin.length < 4) {
+        if (pin.length < props.pinLength) {
             setPin(pin.concat(value || ''));
         }
     };
@@ -19,7 +20,7 @@ const NumPad: FunctionComponent<Props> = (props) => {
         setPin(result);
     };
 
-    const onEnterClicked = () => props.onAuthClick(pin);
+    const onEnterClicked = () => pin.length === props.pinLength && props.onAuthClick(pin);
     return (
         <div>
             <p>{maskingString(pin)}</p>
