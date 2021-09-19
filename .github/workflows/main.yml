@@ -28,7 +28,7 @@ jobs:
       
     # Run unit test
     - name: Run jest unit tests
-      run: yarn test
+      run: yarn test:ci
 
     - name: Build package
       run: yarn build
