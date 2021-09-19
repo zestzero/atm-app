@@ -1,17 +1,20 @@
-import { FunctionComponent, useCallback, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { maskingString } from '../../utils/stringUtils';
+import Button from '../Button/Button';
 import NumButton from '../NumButton/NumButton';
 
-const NumPad: FunctionComponent = () => {
+interface Props {
+    onAuthClick: (pin?: string) => void;
+}
+
+const NumPad: FunctionComponent<Props> = (props) => {
     const [pin, setPin] = useState<string>('');
-    const onPinClicked = useCallback(
-        (value: string) => {
-            if (pin.length < 4) {
-                setPin(pin.concat(value));
-            }
-        },
-        [pin],
-    );
+    const onPinClicked = (value?: string) => {
+        if (pin.length < 4) {
+            setPin(pin.concat(value || ''));
+        }
+    };
+    const onEnterClicked = () => props.onAuthClick(pin);
     return (
         <div>
             <p>{maskingString(pin)}</p>
@@ -35,6 +38,7 @@ const NumPad: FunctionComponent = () => {
                 <NumButton number="0" onClick={onPinClicked} />
                 <NumButton number="⏎" onClick={onPinClicked} />
             </div>
+            <Button onClick={onEnterClicked}>Enter</Button>
         </div>
     );
 };

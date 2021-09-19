@@ -4,7 +4,7 @@ import styles from './NumButton.module.scss';
 
 interface Props {
     number: string;
-    onClick: (value: string) => void;
+    onClick: (value?: string) => void;
 }
 
 const NumButton: FunctionComponent<Props> = (props) => {

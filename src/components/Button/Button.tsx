@@ -2,8 +2,8 @@ import { FunctionComponent, memo } from 'react';
 import { throttle } from '../../utils/throttle';
 
 interface Props {
-    value: string;
-    onClick: (value: string) => void;
+    value?: string;
+    onClick: (value?: string) => void;
     className?: string;
 }
 
