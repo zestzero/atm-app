@@ -23,13 +23,10 @@ export abstract class BaseApiService {
                 body: JSON.stringify(body),
             });
             const data = await response.json();
-            if (response.ok) {
-                return {
-                    status: response.status,
-                    data,
-                };
-            }
-            throw new Error(response.statusText);
+            return {
+                status: response.status,
+                data,
+            };
         } catch (err: any) {
             return Promise.reject(err ? err.message : '');
         }

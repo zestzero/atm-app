@@ -11,14 +11,19 @@ const authService = new AuthenticationService();
 
 export const authPin = createAsyncThunk('AUTH/AUTH_PIN', async (req: AuthenticationRequest) => {
     const response = await authService.request({ pin: req.pin });
-    return response.data;
+    return response;
 });
 
 const authenticationSlice = createSlice({
     name: 'authentication',
     initialState,
     reducers: {
-        // update
+        updateCurrentBalance: (state, action) => {
+            state.currentBalance = action.payload;
+        },
+        updateAuthStatus: (state, action) => {
+            state.status = action.payload;
+        },
     },
     extraReducers(builder) {
         builder
@@ -26,11 +31,18 @@ const authenticationSlice = createSlice({
                 state.status = AuthStatus.Pending;
             })
             .addCase(authPin.fulfilled, (state, action) => {
-                state.status = AuthStatus.Success;
-                state.currentBalance = action.payload.currentBalance;
+                if (action.payload.status === 403) {
+                    state.status = AuthStatus.Failed;
+                } else if (action.payload.status === 200) {
+                    state.status = AuthStatus.Success;
+                    state.currentBalance = action.payload.data.currentBalance;
+                }
+            })
+            .addCase(authPin.rejected, (state) => {
+                state.status = AuthStatus.Error;
             });
     },
 });
 
-// export const {  } = authenticationSlice.actions;
+export const { updateAuthStatus, updateCurrentBalance } = authenticationSlice.actions;
 export default authenticationSlice.reducer;
