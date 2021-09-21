@@ -1,16 +1,21 @@
-export interface Item {
-    name: string;
+interface KnapsackItemBase {
+    value: number;
+}
+export interface Knapsack<T> {
+    items: T[];
     value: number;
 }
 
-export interface Knapsack {
-    items: Item[];
-    value: number;
-}
-
-export const knapSack = (items: Item[], cap: number, itemIndex: number): Knapsack => {
+/**
+ * A function using dynamic programming to calculate and return the items those could be fitted within a given capacity.
+ * @param items List of items
+ * @param cap Maximum capacity of to put item
+ * @param itemIndex Index of item
+ * @returns Return Knapsack type { items: Item[], value: number }
+ */
+export const knapSack = <T extends KnapsackItemBase>(items: T[], cap: number, itemIndex: number): Knapsack<T> => {
     if (cap === 0 || itemIndex < 0) {
-        const sack: Knapsack = {
+        const sack: Knapsack<T> = {
             items: [],
             value: 0,
         };
@@ -29,7 +34,7 @@ export const knapSack = (items: Item[], cap: number, itemIndex: number): Knapsac
     const valueWithoutItem = sackWithoutItem.value;
 
     if (valueWithItem > valueWithoutItem) {
-        const sack: Knapsack = {
+        const sack: Knapsack<T> = {
             items: sackWithItem.items.concat(items[itemIndex]),
             value: valueWithItem,
         };
