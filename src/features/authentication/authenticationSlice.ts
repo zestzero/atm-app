@@ -6,6 +6,7 @@ import { Authentication, AuthStatus } from './types';
 const initialState: Authentication = {
     status: AuthStatus.None,
     currentBalance: 0,
+    overdrawnAvailable: 100,
 };
 const authService = new AuthenticationService();
 

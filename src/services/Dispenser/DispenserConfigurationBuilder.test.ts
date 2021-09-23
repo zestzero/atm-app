@@ -11,5 +11,6 @@ describe('DispenserConfigurationBuilder', () => {
             generateItem(20, 3),
             generateItem(10, 1),
         ]);
+        expect(config.totalAmount).toEqual(70);
     });
 });

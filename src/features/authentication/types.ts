@@ -1,6 +1,7 @@
 export interface Authentication {
     status: AuthStatus;
     currentBalance: number;
+    overdrawnAvailable: number;
 }
 
 export enum AuthStatus {

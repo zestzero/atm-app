@@ -17,7 +17,10 @@ const NumPad: FunctionComponent<Props> = (props) => {
         setVal(result);
     };
     const onResetClick = () => setVal('');
-    const onEnterClick = () => props.onSubmit(val);
+    const onEnterClick = () => {
+        props.onSubmit(val);
+        setVal('');
+    };
 
     return (
         <div>

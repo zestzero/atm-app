@@ -1,5 +1,6 @@
 import { Item, ResultWithError } from 'types/dispenser';
-import NotSuffientAmount from 'types/Error/NotSuffientAmountError';
+import CustomerNotSufficientAmountError from 'types/Error/CustomerNotSufficientAmountError';
+import NotSufficientAmount from 'types/Error/MachineNotSufficientAmountError';
 import OutOfService from 'types/Error/OutOfServiceError';
 import { removeItemsWhenMatched } from 'utils/arrayUtils';
 import { Knapsack, knapSack } from 'utils/knapsack';
@@ -16,11 +17,10 @@ class DispenserService {
         this.remainingAmount = totalAmount;
     }
 
-    public isAvailable = (amount: number, userCreditRemaining: number): boolean => amount <= userCreditRemaining;
-
-    public withdraw = (amount: number): ResultWithError<Knapsack<Item>> => {
+    public withdraw = (amount: number, userCreditRemaining: number): ResultWithError<Knapsack<Item>> => {
+        if (userCreditRemaining < amount) return { error: new CustomerNotSufficientAmountError() };
         if (this.remainingAmount === 0) return { error: new OutOfService() };
-        if (amount > this.remainingAmount) return { error: new NotSuffientAmount() };
+        if (this.remainingAmount < amount) return { error: new NotSufficientAmount() };
 
         const result = knapSack(this.remainingNotes, amount, this.remainingNotes.length - 1);
         this.remainingNotes = removeItemsWhenMatched(this.remainingNotes, result.items, compareFunc);

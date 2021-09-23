@@ -1,6 +1,7 @@
 import 'jest';
-import NotSuffientAmount from 'types/Error/NotSuffientAmountError';
-import OutOfService from 'types/Error/OutOfServiceError';
+import CustomerNotSufficientAmountError from 'types/Error/CustomerNotSufficientAmountError';
+import MachineNotSufficientAmountError from 'types/Error/MachineNotSufficientAmountError';
+import OutOfServiceError from 'types/Error/OutOfServiceError';
 import { generateItem } from 'utils/mockUtils';
 import DispenserConfigurationBuilder from './DispenserConfigurationBuilder';
 import DispenserService from './DispenserService';
@@ -11,7 +12,7 @@ describe('DispenserService', () => {
         const dispenserConfig = new DispenserConfigurationBuilder().withNotes(20, 7).withNotes(10, 15).withNotes(5, 4);
         it('should return correct result if suffient amount', () => {
             const service = new DispenserService(dispenserConfig);
-            const { result: firstWithdraw } = service.withdraw(140);
+            const { result: firstWithdraw } = service.withdraw(140, 500);
             expect(firstWithdraw?.value).toEqual(140);
             expect(firstWithdraw?.items).toEqual([
                 generateItem(20, 7),
@@ -31,7 +32,7 @@ describe('DispenserService', () => {
             ]);
             expect(service.getRemainingAmount()).toEqual(170);
 
-            const { result: secondWithdraw } = service.withdraw(140);
+            const { result: secondWithdraw } = service.withdraw(140, 360);
             expect(secondWithdraw?.value).toEqual(140);
             expect(secondWithdraw?.items).toEqual([
                 generateItem(20, 2),
@@ -48,16 +49,23 @@ describe('DispenserService', () => {
             expect(service.getRemainingAmount()).toEqual(30);
         });
 
-        it('should return error if insuffient amount', () => {
+        it('should return MachineNotSufficientAmount error if insuffient amount', () => {
             const service = new DispenserService(dispenserConfig);
-            const { error } = service.withdraw(999);
-            expect(error).toBeInstanceOf(NotSuffientAmount);
+            const { error } = service.withdraw(999, 1000);
+            expect(error).toBeInstanceOf(MachineNotSufficientAmountError);
         });
 
-        it('should return error if machine does not have money', () => {
+        it('should return OutOfService error if machine does not contain any money', () => {
             const service = new DispenserService(new DispenserConfigurationBuilder());
-            const { error } = service.withdraw(100);
-            expect(error).toBeInstanceOf(OutOfService);
+            const { error } = service.withdraw(100, 1000);
+            expect(error).toBeInstanceOf(OutOfServiceError);
+        });
+
+        it('should return error if user does not have enough money', () => {
+            const dispenserConfig = new DispenserConfigurationBuilder().withNotes(20, 10);
+            const service = new DispenserService(dispenserConfig);
+            const { error } = service.withdraw(130, 20);
+            expect(error).toBeInstanceOf(CustomerNotSufficientAmountError);
         });
     });
 });

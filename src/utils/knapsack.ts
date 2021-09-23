@@ -1,12 +1,4 @@
-export interface KnapsackItemBase {
-    weight: number;
-    value: number;
-}
-export interface Knapsack<T> {
-    items: T[];
-    weight: number;
-    value: number;
-}
+import { Knapsack, KnapsackItemBase } from 'types/dispenser';
 
 /**
  * A function using dynamic programming to calculate and return the items which provide the most value

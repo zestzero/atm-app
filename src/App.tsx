@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from 'app/hook';
 import { Page } from 'features/pageConfig/types';
 import { changePage } from 'features/pageConfig/pageConfigSlice';
 import { AuthStatus } from 'features/authentication/types';
-import './App.scss';
 import Withdraw from 'components/Pages/Withdraw/Withdraw';
 import Login from 'components/Pages/Login/Login';
 import Modal from 'components/Modal/Modal';
+import styles from './App.module.scss';
 
 const App: FunctionComponent = () => {
     const dispatch = useAppDispatch();
@@ -21,11 +21,12 @@ const App: FunctionComponent = () => {
     }, [authStatus]);
 
     return (
-        <div className="App">
-            <div className="App-body">
+        <div>
+            <div className={styles.header}>Welcome to ATM</div>
+            <div className={styles.body}>
                 {currentPage === Page.LOGIN && <Login />}
                 {currentPage === Page.WITHDRAW && <Withdraw />}
-                {currentPage === Page.ERROR && <h1>ERROR!</h1>}
+                {currentPage === Page.ERROR && <h1>Out of service!</h1>}
             </div>
             {currentPage === Page.LOADING && <Modal>TEST</Modal>}
         </div>

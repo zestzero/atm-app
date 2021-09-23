@@ -15,8 +15,8 @@ const Login: FunctionComponent = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.loginTitle}></div>
-            <div>
+            <div className={styles.titleSection}></div>
+            <div className={styles.pinSection}>
                 {authStatus === AuthStatus.Failed && <h3>Wrong pin</h3>}
                 <PinPad pinLength={4} onAuthClick={onAuthClick} />
             </div>

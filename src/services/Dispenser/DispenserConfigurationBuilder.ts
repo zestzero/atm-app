@@ -17,7 +17,10 @@ class DispenserConfigurationBuilder {
         return this;
     };
 
-    public build = (): DispenserConfig => ({ totalNotes: this.totalNotes, totalAmount: this.totalAmount });
+    public build = (): DispenserConfig => ({
+        totalNotes: this.totalNotes,
+        totalAmount: this.totalAmount,
+    });
 }
 
 export default DispenserConfigurationBuilder;
