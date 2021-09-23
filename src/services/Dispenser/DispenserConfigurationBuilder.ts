@@ -5,7 +5,7 @@ interface DispenserConfig {
     totalAmount: number;
 }
 
-export class DispenserConfigurationBuilder {
+class DispenserConfigurationBuilder {
     private totalNotes: Item[] = [];
     private totalAmount = 0;
 
@@ -19,3 +19,5 @@ export class DispenserConfigurationBuilder {
 
     public build = (): DispenserConfig => ({ totalNotes: this.totalNotes, totalAmount: this.totalAmount });
 }
+
+export default DispenserConfigurationBuilder;

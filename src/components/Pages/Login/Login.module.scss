@@ -1,0 +1,13 @@
+@import '../../../styles/colors';
+
+.wrapper {
+    display: grid;
+    width: 100%;
+    @media only screen and (min-width: 700px) {
+        grid-template-columns: 50% 50%;        
+    }
+}
+
+.loginTitle {
+    
+}

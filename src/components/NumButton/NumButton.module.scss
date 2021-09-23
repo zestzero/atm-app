@@ -1,8 +1,16 @@
+@import '../../styles/colors';
+
 .NumButton {
     border: 1px solid #eee;
+    border-radius: 7px;
+    color: #eee;
     text-align: center;
-    border-radius: 15px;
     font-size: 25px;
-    padding: 0px 25px;
+    font-weight: 700;
     user-select: none;
+    background-color: $btn;
+    cursor: pointer;
+    &:active {
+        background-color: $btnActive;
+    }
 }

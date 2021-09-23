@@ -1,0 +1,20 @@
+@import '../../styles/colors';
+
+.padText {
+    color: $text;
+    line-height: 22px;
+    font-size: 22px;
+    min-height: 22px;
+    background-color: white;
+    padding: 14px;
+    margin: auto;
+    width: 200px;
+    text-align: center;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px;
+}

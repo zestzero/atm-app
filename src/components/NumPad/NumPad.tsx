@@ -1,52 +1,37 @@
-import { FunctionComponent, useState } from 'react';
-import { maskingString } from 'utils/stringUtils';
+import { FunctionComponent, memo, useState } from 'react';
 import Button from 'components/Button/Button';
-import NumButton from 'components/NumButton/NumButton';
+import GroupNumPad from 'components/NumButton/GroupNumPad';
+import styles from './NumPad.module.scss';
 
 interface Props {
-    pinLength: number;
-    onAuthClick: (pin?: string) => void;
+    onSubmit: (pin?: string) => void;
 }
 
 const NumPad: FunctionComponent<Props> = (props) => {
-    const [pin, setPin] = useState<string>('');
-    const onPinClicked = (value?: string) => {
-        if (pin.length < props.pinLength) {
-            setPin(pin.concat(value || ''));
-        }
+    const [val, setVal] = useState<string>('');
+    const onNumberClick = (value?: string) => {
+        setVal(val.concat(value || ''));
     };
-    const onBackspaceClicked = () => {
-        const result = pin.substr(0, pin.length - 1);
-        setPin(result);
+    const onBackspaceClick = () => {
+        const result = val.substr(0, val.length - 1);
+        setVal(result);
     };
+    const onResetClick = () => setVal('');
+    const onEnterClick = () => props.onSubmit(val);
 
-    const onEnterClicked = () => pin.length === props.pinLength && props.onAuthClick(pin);
     return (
         <div>
-            <p>{maskingString(pin)}</p>
-            <div>
-                <NumButton number="1" onClick={onPinClicked} />
-                <NumButton number="2" onClick={onPinClicked} />
-                <NumButton number="3" onClick={onPinClicked} />
+            <div className={styles.textContainer}>
+                <p className={styles.padText}>{val}</p>
             </div>
-            <div>
-                <NumButton number="4" onClick={onPinClicked} />
-                <NumButton number="5" onClick={onPinClicked} />
-                <NumButton number="6" onClick={onPinClicked} />
-            </div>
-            <div>
-                <NumButton number="7" onClick={onPinClicked} />
-                <NumButton number="8" onClick={onPinClicked} />
-                <NumButton number="9" onClick={onPinClicked} />
-            </div>
-            <div>
-                <NumButton number="<" onClick={onBackspaceClicked} />
-                <NumButton number="0" onClick={onPinClicked} />
-                <NumButton number="⏎" onClick={onPinClicked} />
-            </div>
-            <Button onClick={onEnterClicked}>Enter</Button>
+            <GroupNumPad
+                onButtonClick={onNumberClick}
+                onBackspaceClick={onBackspaceClick}
+                onResetClick={onResetClick}
+            />
+            <Button onClick={onEnterClick}>Enter</Button>
         </div>
     );
 };
 
-export { NumPad };
+export default memo(NumPad);

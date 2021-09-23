@@ -1,6 +1,6 @@
 import 'jest';
 import { generateItem } from 'utils/mockUtils';
-import { DispenserConfigurationBuilder } from './DispenserConfigurationBuilder';
+import DispenserConfigurationBuilder from './DispenserConfigurationBuilder';
 
 describe('DispenserConfigurationBuilder', () => {
     it('should return configuration correctly', () => {

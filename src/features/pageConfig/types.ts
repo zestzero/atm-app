@@ -6,4 +6,5 @@ export enum Page {
     LOGIN,
     WITHDRAW,
     ERROR,
+    LOADING,
 }

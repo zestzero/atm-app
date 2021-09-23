@@ -1,8 +1,9 @@
 import 'jest';
-import { NotSuffientAmount } from 'types/Error/NotSuffientAmountError';
+import NotSuffientAmount from 'types/Error/NotSuffientAmountError';
+import OutOfService from 'types/Error/OutOfServiceError';
 import { generateItem } from 'utils/mockUtils';
-import { DispenserConfigurationBuilder } from './DispenserConfigurationBuilder';
-import { DispenserService } from './DispenserService';
+import DispenserConfigurationBuilder from './DispenserConfigurationBuilder';
+import DispenserService from './DispenserService';
 
 describe('DispenserService', () => {
     describe('withdraw', () => {
@@ -51,6 +52,12 @@ describe('DispenserService', () => {
             const service = new DispenserService(dispenserConfig);
             const { error } = service.withdraw(999);
             expect(error).toBeInstanceOf(NotSuffientAmount);
+        });
+
+        it('should return error if machine does not have money', () => {
+            const service = new DispenserService(new DispenserConfigurationBuilder());
+            const { error } = service.withdraw(100);
+            expect(error).toBeInstanceOf(OutOfService);
         });
     });
 });
