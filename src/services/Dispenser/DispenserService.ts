@@ -1,10 +1,10 @@
-import { Item, ResultWithError } from '../../types/dispenser';
-import { NotSuffientAmount } from '../../types/Error/NotSuffientAmountError';
-import { removeItemsWhenMatched } from '../../utils/arrayUtils';
-import { Knapsack, knapSack } from '../../utils/knapsack';
+import { Item, ResultWithError } from 'types/dispenser';
+import { NotSuffientAmount } from 'types/Error/NotSuffientAmountError';
+import { removeItemsWhenMatched } from 'utils/arrayUtils';
+import { Knapsack, knapSack } from 'utils/knapsack';
 import { DispenserConfigurationBuilder } from './DispenserConfigurationBuilder';
 
-const compareFunc = (item1: Item) => (item2: Item) => item1.name === item2.name;
+const compareFunc = (item1: Item) => (item2: Item) => item1.name === item2.name && item1.weight === item2.weight;
 export class DispenserService {
     private remainingNotes: Item[];
     private remainingAmount: number;

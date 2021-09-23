@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import Button from '../Button/Button';
+import Button from 'components/Button/Button';
 import styles from './NumButton.module.scss';
 
 interface Props {

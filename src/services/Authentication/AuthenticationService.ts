@@ -1,6 +1,6 @@
-import { AuthenticationRequest, AuthenticationResponse } from '../../types/authentication';
-import { Response } from '../../types/response';
-import { BaseApiService } from '../BaseApiService';
+import { AuthenticationRequest, AuthenticationResponse } from 'types/authentication';
+import { Response } from 'types/response';
+import { BaseApiService } from 'services/BaseApiService';
 
 export class AuthenticationService extends BaseApiService {
     constructor() {

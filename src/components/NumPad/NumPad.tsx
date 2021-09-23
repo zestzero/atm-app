@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react';
-import { maskingString } from '../../utils/stringUtils';
-import Button from '../Button/Button';
-import NumButton from '../NumButton/NumButton';
+import { maskingString } from 'utils/stringUtils';
+import Button from 'components/Button/Button';
+import NumButton from 'components/NumButton/NumButton';
 
 interface Props {
     pinLength: number;

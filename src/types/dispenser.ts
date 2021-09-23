@@ -1,6 +1,7 @@
-export interface Item {
+import { KnapsackItemBase } from 'utils/knapsack';
+
+export interface Item extends KnapsackItemBase {
     name: string;
-    value: number;
 }
 
 export interface ResultWithError<T> {

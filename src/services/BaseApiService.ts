@@ -2,7 +2,7 @@
 
 import unfetch from 'isomorphic-unfetch';
 import fetch from 'isomorphic-unfetch';
-import { Response } from '../types/response';
+import { Response } from 'types/response';
 
 export abstract class BaseApiService {
     private API_URL = process.env.REACT_APP_API_URL;

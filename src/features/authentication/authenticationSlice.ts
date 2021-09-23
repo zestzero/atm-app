@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AuthenticationService } from '../../services/Authentication/AuthenticationService';
-import { AuthenticationRequest } from '../../types/authentication';
+import { AuthenticationService } from 'services/Authentication/AuthenticationService';
+import { AuthenticationRequest } from 'types/authentication';
 import { Authentication, AuthStatus } from './types';
 
 const initialState: Authentication = {
