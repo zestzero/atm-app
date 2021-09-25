@@ -15,13 +15,15 @@ const Login: FunctionComponent = () => {
 
     return (
         <>
-            <div className={styles.header}>Welcome to ATM</div>
+            <div className={styles.header}>
+                {'>>'} ATM {'<<'}
+            </div>
             <div className={styles.wrapper}>
                 <div className={styles.titleSection}>
-                    <div>
+                    <div className={styles.titleTextContainer}>
                         <div className={styles.titleText}>Be safe, get vaccinated</div>
-                        <img className={styles.titleImage} src="/image_title.jpg" />
                     </div>
+                    <img className={styles.titleImage} src="/image_title.jpg" />
                 </div>
                 <div className={styles.pinSection}>
                     <span>Enter your pin</span>
