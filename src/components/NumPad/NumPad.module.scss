@@ -1,0 +1,31 @@
+@import '../../styles/colors';
+@import '../../styles/mixin';
+
+.padText {
+    color: $text;
+    line-height: 22px;
+    font-size: 22px;
+    min-height: 22px;
+    background-color: white;
+    color: $main;
+    padding: 14px;
+    margin: auto;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px;
+}
+
+.submitBtn {
+    @include activeButton;
+}
+
+.cancelBtn {
+    @include cancelButton;
+}

@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'react';
-import Button from '../Button/Button';
+import { FunctionComponent, memo } from 'react';
+import Button from 'components/Button/Button';
 import styles from './NumButton.module.scss';
 
 interface Props {
@@ -15,4 +15,4 @@ const NumButton: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default NumButton;
+export default memo(NumButton);

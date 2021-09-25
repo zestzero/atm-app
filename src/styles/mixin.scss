@@ -1,0 +1,31 @@
+@import './colors';
+
+@mixin defaultButton {
+    border: 0px;
+    border-radius: 7px;
+    color: #eee;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    user-select: none;
+    background-color: $btn;
+    cursor: pointer;
+    box-shadow: $btnShadow;
+    padding: 15px;
+    margin: 15px;
+    &:active {
+        box-shadow: none;
+    }
+}
+
+@mixin activeButton {
+    @include defaultButton;
+    background-color: $btnActive;
+}
+
+
+@mixin cancelButton {
+    @include defaultButton;
+    color: $main;
+    background-color: $btnDisable;
+}

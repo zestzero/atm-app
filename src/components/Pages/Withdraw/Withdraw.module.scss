@@ -1,0 +1,33 @@
+@import '../../../styles/colors';
+@import '../../../styles/mixin';
+
+.wrapper {
+    display: grid;
+    width: 100%;
+    @media only screen and (min-width: 768px) {
+        grid-template-columns: 66.667% 33.334%;
+    }
+}
+
+.titleSection {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pinSection {
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.confirmBtn {
+    @include activeButton;
+}
+
+.cancelBtn {
+    @include cancelButton;
+}

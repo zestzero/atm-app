@@ -1,0 +1,50 @@
+@import '../../../styles/colors';
+
+.wrapper {
+    background-color: $main;
+    display: grid;
+    width: 100%;
+    @media only screen and (min-width: 768px) {
+        grid-template-columns: 66.667% 33.334%;
+    }
+}
+
+.header {
+    padding: 15px;
+}
+
+.titleSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.titleImage {
+    width: 100%;
+}
+
+.titleText {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    font-size: 4vw;
+}
+
+.titleTextContainer {
+    position: absolute;
+    top: calc(50% - 2vw);
+    width: 100%;
+    text-align: center;
+}
+
+.pinSection {
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.error {
+    color: red;
+}

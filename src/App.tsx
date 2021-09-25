@@ -1,29 +1,33 @@
-import { FunctionComponent, useState } from 'react';
-import { AuthenticationService } from './services/AuthenticationService';
-import { useAppSelector } from './app/hook';
-import { NumPad } from './components/NumPad/NumPad';
-import { Page } from './features/pageConfig/types';
-import './App.scss';
-
-const authService = new AuthenticationService();
+import { FunctionComponent, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'app/hook';
+import { Page } from 'features/pageConfig/types';
+import { changePage } from 'features/pageConfig/pageConfigSlice';
+import { AuthStatus } from 'features/authentication/types';
+import Withdraw from 'components/Pages/Withdraw/Withdraw';
+import Login from 'components/Pages/Login/Login';
+import Modal from 'components/Modal/Modal';
+import styles from './App.module.scss';
 
 const App: FunctionComponent = () => {
+    const dispatch = useAppDispatch();
     const currentPage = useAppSelector((state) => state.pageConfig.currentPage);
-    const [currentBalance, setCurrentBalance] = useState<number>(0);
+    const authStatus = useAppSelector((state) => state.auth.status);
 
-    const onAuthClick = async (pin?: string) => {
-        const response = await authService.request({ pin: pin as string });
-        if (response.isSuccess) {
-            setCurrentBalance(response.data.currentBalance);
-        } else {
-            console.log('Auth error');
-        }
-    };
+    useEffect(() => {
+        if (authStatus === AuthStatus.Failed || authStatus === AuthStatus.None) dispatch(changePage(Page.LOGIN));
+        if (authStatus === AuthStatus.Success) dispatch(changePage(Page.WITHDRAW));
+        if (authStatus === AuthStatus.Error) dispatch(changePage(Page.OUTOFSERVICE));
+        if (authStatus === AuthStatus.Pending) dispatch(changePage(Page.LOADING));
+    }, [authStatus]);
 
     return (
-        <div className="App">
-            <p>{currentBalance}</p>
-            <header className="App-header">{currentPage === Page.LOGIN && <NumPad onAuthClick={onAuthClick} />}</header>
+        <div>
+            <div className={styles.body}>
+                {currentPage === Page.LOGIN && <Login />}
+                {currentPage === Page.WITHDRAW && <Withdraw />}
+                {currentPage === Page.OUTOFSERVICE && <h1>Out of service!</h1>}
+            </div>
+            {<Modal shouldDisplay={currentPage === Page.LOADING}>Please wait a moment...</Modal>}
         </div>
     );
 };

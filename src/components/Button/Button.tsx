@@ -1,5 +1,5 @@
 import { FunctionComponent, memo } from 'react';
-import { throttle } from '../../utils/throttle';
+import { throttle } from 'utils/throttle';
 
 interface Props {
     value?: string;

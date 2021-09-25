@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Currency } from 'types/currency';
 import { Page, PageConfigState } from './types';
 
 const initialState: PageConfigState = {
     currentPage: Page.LOGIN,
+    currency: Currency.EUR,
 };
 
 const pageConfigSlice = createSlice({

@@ -1,0 +1,28 @@
+@import '../../styles/colors';
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $main;
+    background-color: white;
+    box-shadow: $btnShadow;
+    max-width: 450px;
+    min-height: 150px;
+    padding: 25px;
+    border-radius: 5px;
+    font-size: 18px;
+}
