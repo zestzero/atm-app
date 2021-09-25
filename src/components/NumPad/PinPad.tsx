@@ -30,7 +30,9 @@ const PinPad: FunctionComponent<Props> = (props) => {
     return (
         <div>
             <div className={styles.textContainer}>
-                <p className={styles.padText}>{maskingString(pin)}</p>
+                <p data-cy="pinpad-text" className={styles.padText}>
+                    {maskingString(pin)}
+                </p>
             </div>
             <GroupNumPad onButtonClick={onPinClicked} onBackspaceClick={onBackspaceClick} onResetClick={onResetClick} />
         </div>

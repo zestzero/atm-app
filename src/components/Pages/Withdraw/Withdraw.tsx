@@ -128,7 +128,9 @@ const Withdraw: FunctionComponent = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.titleSection}>
-                <h2>Your current balance is {currencyFormatter(currentBalance, selectedCurrency)}</h2>
+                <h2 data-cy="current-balance">
+                    Your current balance is {currencyFormatter(currentBalance, selectedCurrency)}
+                </h2>
                 {renderDispenseResult(dispenseResult.result)}
             </div>
             <div className={styles.pinSection}>
