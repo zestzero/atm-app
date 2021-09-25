@@ -5,6 +5,7 @@ import styles from './NumPad.module.scss';
 
 interface Props {
     onSubmit: (pin?: string) => void;
+    onCancel: () => void;
 }
 
 const NumPad: FunctionComponent<Props> = (props) => {
@@ -32,7 +33,12 @@ const NumPad: FunctionComponent<Props> = (props) => {
                 onBackspaceClick={onBackspaceClick}
                 onResetClick={onResetClick}
             />
-            <Button onClick={onEnterClick}>Enter</Button>
+            <Button className={styles.submitBtn} onClick={onEnterClick}>
+                Enter
+            </Button>
+            <Button className={styles.cancelBtn} onClick={props.onCancel}>
+                Cancel
+            </Button>
         </div>
     );
 };

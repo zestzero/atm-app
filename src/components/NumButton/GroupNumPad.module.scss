@@ -1,5 +1,8 @@
 .row {
     display: grid;
     grid-template-columns: 33.333% 33.333% 33.333%;
-    height: 80px;
+    height: 75px;
+    > * {
+        margin: 5px 10px;
+    }
 }

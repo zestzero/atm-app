@@ -14,13 +14,24 @@ const Login: FunctionComponent = () => {
     };
 
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.titleSection}></div>
-            <div className={styles.pinSection}>
-                {authStatus === AuthStatus.Failed && <h3>Wrong pin</h3>}
-                <PinPad pinLength={4} onAuthClick={onAuthClick} />
+        <>
+            <div className={styles.header}>Welcome to ATM</div>
+            <div className={styles.wrapper}>
+                <div className={styles.titleSection}>
+                    <div>
+                        <div className={styles.titleText}>Be safe, get vaccinated</div>
+                        <img className={styles.titleImage} src="/image_title.jpg" />
+                    </div>
+                </div>
+                <div className={styles.pinSection}>
+                    <span>Enter your pin</span>
+                    <PinPad pinLength={4} onAuthClick={onAuthClick} />
+                    {authStatus === AuthStatus.Failed && (
+                        <span className={styles.error}>You have enter the wrong pin number. Please try again</span>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

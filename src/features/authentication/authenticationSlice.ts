@@ -6,7 +6,7 @@ import { Authentication, AuthStatus } from './types';
 const initialState: Authentication = {
     status: AuthStatus.None,
     currentBalance: 0,
-    overdrawnAvailable: 100,
+    overdrawnAmount: 100,
 };
 const authService = new AuthenticationService();
 
@@ -22,8 +22,16 @@ const authenticationSlice = createSlice({
         updateCurrentBalance: (state, action) => {
             state.currentBalance = action.payload;
         },
+        updateOverdrawnAmount: (state, action) => {
+            state.overdrawnAmount = action.payload;
+        },
         updateAuthStatus: (state, action) => {
             state.status = action.payload;
+        },
+        signoff: (state) => {
+            state.currentBalance = initialState.currentBalance;
+            state.status = initialState.status;
+            state.overdrawnAmount = initialState.overdrawnAmount;
         },
     },
     extraReducers(builder) {
@@ -45,5 +53,5 @@ const authenticationSlice = createSlice({
     },
 });
 
-export const { updateAuthStatus, updateCurrentBalance } = authenticationSlice.actions;
+export const { updateAuthStatus, updateCurrentBalance, updateOverdrawnAmount, signoff } = authenticationSlice.actions;
 export default authenticationSlice.reducer;

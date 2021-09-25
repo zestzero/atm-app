@@ -1,7 +1,7 @@
 @import '../../../styles/colors';
+@import '../../../styles/mixin';
 
 .wrapper {
-    background-color: $main;
     display: grid;
     width: 100%;
     @media only screen and (min-width: 768px) {
@@ -10,22 +10,10 @@
 }
 
 .titleSection {
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
-}
-
-.titleImage {
-    width: 100%;
-}
-
-.titleText {
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 20px;
-    position: absolute;
-    top: calc(50% - 1.5vw);
-    font-size: 3vw;
 }
 
 .pinSection {
@@ -36,6 +24,10 @@
     justify-content: center;
 }
 
-.error {
-    color: red;
+.confirmBtn {
+    @include activeButton;
+}
+
+.cancelBtn {
+    @include cancelButton;
 }

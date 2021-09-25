@@ -14,7 +14,7 @@ const App: FunctionComponent = () => {
     const authStatus = useAppSelector((state) => state.auth.status);
 
     useEffect(() => {
-        if (authStatus === AuthStatus.Failed) dispatch(changePage(Page.LOGIN));
+        if (authStatus === AuthStatus.Failed || authStatus === AuthStatus.None) dispatch(changePage(Page.LOGIN));
         if (authStatus === AuthStatus.Success) dispatch(changePage(Page.WITHDRAW));
         if (authStatus === AuthStatus.Error) dispatch(changePage(Page.ERROR));
         if (authStatus === AuthStatus.Pending) dispatch(changePage(Page.LOADING));
@@ -22,13 +22,12 @@ const App: FunctionComponent = () => {
 
     return (
         <div>
-            <div className={styles.header}>Welcome to ATM</div>
             <div className={styles.body}>
                 {currentPage === Page.LOGIN && <Login />}
                 {currentPage === Page.WITHDRAW && <Withdraw />}
                 {currentPage === Page.ERROR && <h1>Out of service!</h1>}
             </div>
-            {currentPage === Page.LOADING && <Modal>TEST</Modal>}
+            {<Modal shouldDisplay={currentPage === Page.LOADING}>Please wait a moment...</Modal>}
         </div>
     );
 };
