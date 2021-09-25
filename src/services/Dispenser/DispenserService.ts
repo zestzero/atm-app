@@ -32,7 +32,7 @@ class DispenserService {
 
     public getRemainingAmount = (): number => this.remainingAmount;
     public shouldOverdrawn = (withdrawAmount: number, currentBalance: number, overdrawnAmount: number): boolean =>
-        currentBalance < withdrawAmount && withdrawAmount < currentBalance + overdrawnAmount;
+        currentBalance < withdrawAmount && withdrawAmount <= currentBalance + overdrawnAmount;
     public getOverdrawnRemaining = (withdrawAmount: number, currentBalance: number, overdrawnAmount: number): number =>
         overdrawnAmount + (currentBalance - withdrawAmount);
 }

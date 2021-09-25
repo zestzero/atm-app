@@ -7,11 +7,11 @@ import DispenserConfigurationBuilder from './DispenserConfigurationBuilder';
 import DispenserService from './DispenserService';
 
 describe('DispenserService', () => {
+    // Total in ATM storage = 310
+    const dispenserConfig = new DispenserConfigurationBuilder().withNotes(20, 7).withNotes(10, 15).withNotes(5, 4);
+    const service = new DispenserService(dispenserConfig);
     describe('withdraw', () => {
-        // Total in ATM storage = 310
-        const dispenserConfig = new DispenserConfigurationBuilder().withNotes(20, 7).withNotes(10, 15).withNotes(5, 4);
         it('should return correct result if suffient amount', () => {
-            const service = new DispenserService(dispenserConfig);
             const { result: firstWithdraw } = service.withdraw(140, 500);
             expect(firstWithdraw?.value).toEqual(140);
             expect(firstWithdraw?.items).toEqual([
@@ -50,7 +50,6 @@ describe('DispenserService', () => {
         });
 
         it('should return MachineNotSufficientAmount error if insuffient amount', () => {
-            const service = new DispenserService(dispenserConfig);
             const { error } = service.withdraw(999, 1000);
             expect(error).toBeInstanceOf(MachineNotSufficientAmountError);
         });
@@ -67,5 +66,35 @@ describe('DispenserService', () => {
             const { error } = service.withdraw(130, 20);
             expect(error).toBeInstanceOf(CustomerNotSufficientAmountError);
         });
+    });
+
+    describe('shouldOverdrawn', () => {
+        it.each`
+            withdrawAmount | currentBalance | overdrawnAmount | expected
+            ${100}         | ${20}          | ${100}          | ${true}
+            ${100}         | ${0}           | ${100}          | ${true}
+            ${100}         | ${0}           | ${50}           | ${false}
+            ${100}         | ${100}         | ${50}           | ${false}
+        `(
+            'should return $expected when withdrawAmount: $withdrawAmount, currentBalance: $currentBalance, overdrawAmount: $overdrawnAmount',
+            ({ withdrawAmount, currentBalance, overdrawnAmount, expected }) => {
+                const result = service.shouldOverdrawn(withdrawAmount, currentBalance, overdrawnAmount);
+                expect(result).toEqual(expected);
+            },
+        );
+    });
+
+    describe('getOverdrawnRemaining', () => {
+        it.each`
+            withdrawAmount | currentBalance | overdrawnAmount | expected
+            ${100}         | ${20}          | ${100}          | ${20}
+            ${20}          | ${20}          | ${100}          | ${100}
+        `(
+            'should return $expected when withdrawAmount: $withdrawAmount, currentBalance: $currentBalance, overdrawAmount: $overdrawnAmount',
+            ({ withdrawAmount, currentBalance, overdrawnAmount, expected }) => {
+                const result = service.getOverdrawnRemaining(withdrawAmount, currentBalance, overdrawnAmount);
+                expect(result).toEqual(expected);
+            },
+        );
     });
 });
