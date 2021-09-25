@@ -50,9 +50,6 @@ const Withdraw: FunctionComponent = () => {
                 }
                 dispatch(updateCurrentBalance(currentBalance - result.result.value));
             }
-            if (result.error && result.error instanceof MachineNotSufficientAmountError) {
-                dispatch(changePage(Page.ERROR));
-            }
             setDispenseResult(result);
             setLoading(false);
             setUseOverdrawn(false);
@@ -71,7 +68,15 @@ const Withdraw: FunctionComponent = () => {
         setWithdrawAmount(amount);
     };
 
-    const onCancel = () => dispatch(signoff());
+    const onCancel = () => {
+        dispatch(signoff());
+        if (
+            (dispenseResult.error && dispenseResult.error instanceof MachineNotSufficientAmountError) ||
+            dispenseResult.error instanceof OutOfServiceError
+        ) {
+            dispatch(changePage(Page.OUTOFSERVICE));
+        }
+    };
     const onOverdrawnClick = () => {
         setLoading(true);
         setOverdrawnAlert(false);
@@ -114,9 +119,6 @@ const Withdraw: FunctionComponent = () => {
         }
         if (error instanceof MachineNotSufficientAmountError) {
             return "This machine doesn't have sufficient amount of money.";
-        }
-        if (error instanceof OutOfServiceError) {
-            return 'Out of service';
         }
         if (error instanceof InvalidAmountError) {
             return 'Withdraw amount should be greater than 0';

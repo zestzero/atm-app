@@ -8,6 +8,6 @@ export interface PageConfigState {
 export enum Page {
     LOGIN,
     WITHDRAW,
-    ERROR,
+    OUTOFSERVICE,
     LOADING,
 }

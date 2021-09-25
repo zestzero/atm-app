@@ -26,7 +26,9 @@ const NumPad: FunctionComponent<Props> = (props) => {
     return (
         <div>
             <div className={styles.textContainer}>
-                <p className={styles.padText}>{val}</p>
+                <p data-cy="numpad-text" className={styles.padText}>
+                    {val}
+                </p>
             </div>
             <GroupNumPad
                 onButtonClick={onNumberClick}

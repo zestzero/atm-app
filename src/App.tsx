@@ -16,7 +16,7 @@ const App: FunctionComponent = () => {
     useEffect(() => {
         if (authStatus === AuthStatus.Failed || authStatus === AuthStatus.None) dispatch(changePage(Page.LOGIN));
         if (authStatus === AuthStatus.Success) dispatch(changePage(Page.WITHDRAW));
-        if (authStatus === AuthStatus.Error) dispatch(changePage(Page.ERROR));
+        if (authStatus === AuthStatus.Error) dispatch(changePage(Page.OUTOFSERVICE));
         if (authStatus === AuthStatus.Pending) dispatch(changePage(Page.LOADING));
     }, [authStatus]);
 
@@ -25,7 +25,7 @@ const App: FunctionComponent = () => {
             <div className={styles.body}>
                 {currentPage === Page.LOGIN && <Login />}
                 {currentPage === Page.WITHDRAW && <Withdraw />}
-                {currentPage === Page.ERROR && <h1>Out of service!</h1>}
+                {currentPage === Page.OUTOFSERVICE && <h1>Out of service!</h1>}
             </div>
             {<Modal shouldDisplay={currentPage === Page.LOADING}>Please wait a moment...</Modal>}
         </div>
