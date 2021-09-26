@@ -14,5 +14,6 @@
     ],
     "rules": {
         "indent": ["error", 4]
-    }
+    },
+    "ignorePatterns": ["**/cypress/*"]
 }
