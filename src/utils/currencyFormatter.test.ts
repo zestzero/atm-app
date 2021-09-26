@@ -7,4 +7,9 @@ describe('currencyFormatter', () => {
         const result = currencyFormatter(100, Currency.EUR);
         expect(result).toEqual('£100');
     });
+
+    it('should return correct format', () => {
+        const result = currencyFormatter(-100, Currency.EUR);
+        expect(result).toEqual('-£100');
+    });
 });

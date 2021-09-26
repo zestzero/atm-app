@@ -25,7 +25,7 @@ const App: FunctionComponent = () => {
             <div className={styles.body}>
                 {currentPage === Page.LOGIN && <Login />}
                 {currentPage === Page.WITHDRAW && <Withdraw />}
-                {currentPage === Page.OUTOFSERVICE && <h1>Out of service!</h1>}
+                {currentPage === Page.OUTOFSERVICE && <h1 data-cy="outofservice">Out of service!</h1>}
             </div>
             {<Modal shouldDisplay={currentPage === Page.LOADING}>Please wait a moment...</Modal>}
         </div>

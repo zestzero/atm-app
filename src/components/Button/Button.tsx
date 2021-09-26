@@ -5,12 +5,13 @@ interface Props {
     value?: string;
     onClick: (value?: string) => void;
     className?: string;
+    dataCy?: string;
 }
 
 const Button: FunctionComponent<Props> = memo((props) => {
     const throttleClick = throttle(() => props.onClick(props.value));
     return (
-        <button className={props.className} onClick={throttleClick}>
+        <button data-cy={props.dataCy} className={props.className} onClick={throttleClick}>
             {props.children}
         </button>
     );

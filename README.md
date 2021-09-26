@@ -1,6 +1,6 @@
 # ATM web application
 
-## Prerequisite
+## Installations
 - Nodejs
 - Yarn
 - Docker
@@ -18,3 +18,10 @@ $ yarn start
 ```sh
 $ yarn test
 ```
+- Run cypress test
+```sh
+$ yarn cypress:open
+```
+
+## Future improvement
+- Add web worker to stop UI frozen from recursively execution of [knapsack](https://github.com/zestzero/atm-app/blob/master/src/utils/knapsack.ts).

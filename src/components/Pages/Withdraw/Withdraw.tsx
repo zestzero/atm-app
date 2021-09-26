@@ -15,7 +15,6 @@ import InvalidAmountError from 'types/Error/InvalidAmountError';
 import styles from './Withdraw.module.scss';
 import Button from 'components/Button/Button';
 import { currencyFormatter } from 'utils/currencyFormatter';
-import Loading from 'components/Loading/Loading';
 import { changePage } from 'features/pageConfig/pageConfigSlice';
 import { Page } from 'features/pageConfig/types';
 
@@ -103,8 +102,8 @@ const Withdraw: FunctionComponent = () => {
 
         return (
             <div>
-                <h3>Withdrawing {currencyFormatter(result.value, selectedCurrency)}</h3>
-                <h4>
+                <h3 data-cy="withdraw-amount">Withdrawing {currencyFormatter(result.value, selectedCurrency)}</h3>
+                <h4 data-cy="withdraw-message">
                     <div>You should be receiving with the following notes.</div>
                     <div>Please check before leaving!</div>
                 </h4>
@@ -142,23 +141,21 @@ const Withdraw: FunctionComponent = () => {
                         <div>{currencyFormatter(overdrawnAmount, selectedCurrency)} is available for overdrawn</div>
                     </div>
                     <div>
-                        <Button className={styles.confirmBtn} onClick={onOverdrawnClick}>
+                        <Button dataCy="overdrawn-confirm" className={styles.confirmBtn} onClick={onOverdrawnClick}>
                             Confirm
                         </Button>
-                        <Button className={styles.cancelBtn} onClick={onOverdrawnCancelClick}>
+                        <Button dataCy="overdrawn-cancel" className={styles.cancelBtn} onClick={onOverdrawnCancelClick}>
                             Cancel
                         </Button>
                     </div>
                 </Modal>
                 <Modal shouldDisplay={!!dispenseResult.error}>
-                    <div>{renderErrorMessage(dispenseResult.error)}</div>
+                    <div data-cy="modal-message">{renderErrorMessage(dispenseResult.error)}</div>
                     <Button className={styles.cancelBtn} onClick={onErrorModalClick}>
                         OK
                     </Button>
                 </Modal>
-                <Modal shouldDisplay={loading}>
-                    Processing <Loading />
-                </Modal>
+                <Modal shouldDisplay={loading}>Processing...</Modal>
             </div>
         </div>
     );

@@ -1,0 +1,7 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "videos": false,
+    "env": {
+        "apiUrl": "https://frontend-challenge.screencloud-michael.now.sh"
+    }
+}

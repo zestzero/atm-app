@@ -34,7 +34,12 @@ const PinPad: FunctionComponent<Props> = (props) => {
                     {maskingString(pin)}
                 </p>
             </div>
-            <GroupNumPad onButtonClick={onPinClicked} onBackspaceClick={onBackspaceClick} onResetClick={onResetClick} />
+            <GroupNumPad
+                dataCy="pinpad"
+                onButtonClick={onPinClicked}
+                onBackspaceClick={onBackspaceClick}
+                onResetClick={onResetClick}
+            />
         </div>
     );
 };
