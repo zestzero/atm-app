@@ -36,10 +36,10 @@ const NumPad: FunctionComponent<Props> = (props) => {
                 onBackspaceClick={onBackspaceClick}
                 onResetClick={onResetClick}
             />
-            <Button className={styles.submitBtn} onClick={onEnterClick}>
+            <Button dataCy="numpad-enter" className={styles.submitBtn} onClick={onEnterClick}>
                 Enter
             </Button>
-            <Button className={styles.cancelBtn} onClick={props.onCancel}>
+            <Button dataCy="numpad-cancel" className={styles.cancelBtn} onClick={props.onCancel}>
                 Cancel
             </Button>
         </div>

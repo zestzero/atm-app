@@ -1,10 +1,7 @@
-describe('Login failed', () => {
-    it('should successfully loads', () => {
+describe('Out of service', () => {
+    it('should return out of service screen when cannot connect to API', () => {
         cy.intercept('POST', `https://frontend-challenge.screencloud-michael.now.sh/api/pin`, {
-            statusCode: 403,
-            body: {
-                error: 'Incorrect or missing PIN.',
-            },
+            statusCode: 404,
         }).as('auth');
         cy.visit('/');
         cy.dataCy('pinpad-1').click();
@@ -12,9 +9,9 @@ describe('Login failed', () => {
         cy.dataCy('pinpad-3').click();
         cy.dataCy('pinpad-4').click();
         cy.wait('@auth').then(({ response }) => {
-            expect(response.statusCode).to.eq(403);
+            expect(response.statusCode).to.eq(404);
             expect(response.body.currentBalance).to.eq(undefined);
         });
-        cy.dataCy('login-auth-fail').should('have.text', 'You have enter the wrong pin number. Please try again');
+        cy.dataCy('outofservice').should('be.visible');
     });
 });

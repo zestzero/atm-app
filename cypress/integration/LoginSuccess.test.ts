@@ -1,5 +1,5 @@
 describe('Login Success', () => {
-    it('successfully loads', () => {
+    it('should successfully loads', () => {
         cy.intercept('POST', `https://frontend-challenge.screencloud-michael.now.sh/api/pin`, {
             statusCode: 200,
             body: {
