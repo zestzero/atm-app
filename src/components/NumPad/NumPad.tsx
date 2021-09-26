@@ -31,6 +31,7 @@ const NumPad: FunctionComponent<Props> = (props) => {
                 </p>
             </div>
             <GroupNumPad
+                dataCy="numpad"
                 onButtonClick={onNumberClick}
                 onBackspaceClick={onBackspaceClick}
                 onResetClick={onResetClick}

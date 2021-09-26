@@ -29,7 +29,9 @@ const Login: FunctionComponent = () => {
                     <span>Enter your pin</span>
                     <PinPad pinLength={4} onAuthClick={onAuthClick} />
                     {authStatus === AuthStatus.Failed && (
-                        <span className={styles.error}>You have enter the wrong pin number. Please try again</span>
+                        <span data-cy="login-auth-fail" className={styles.error}>
+                            You have enter the wrong pin number. Please try again
+                        </span>
                     )}
                 </div>
             </div>
